@@ -21,7 +21,7 @@ public class RandomNumberGenerator {
         this.omitList = new ArrayList<Integer>();
     }
 
-    //a set of number will not be generated
+    //a set of number will not be generated without duplicated numbers in the list
     public void setOmitNumbers(ArrayList<Integer> omitList)
     {
         this.omitList = omitList;

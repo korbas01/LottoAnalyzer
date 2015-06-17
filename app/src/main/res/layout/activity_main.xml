@@ -7,53 +7,25 @@
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
     android:id="@+id/Layout1">
 
-    <Button
+    <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="GetWinningNums(649)"
-        android:id="@+id/BtnGetWinNums"
+        android:id="@+id/listView"
+        android:choiceMode="none"
         android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="32dp"
-        android:layout_alignParentEnd="true" />
+        android:layout_above="@+id/linearLayout" />
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_above="@+id/adView"
+        android:gravity="right"
+        android:id="@+id/linearLayout">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="GetLastWinningNums(649)"
-        android:id="@+id/BtnGetLastWinNums"
-        android:layout_below="@+id/BtnGetWinNums"
-        android:layout_alignEnd="@+id/BtnGetWinNums"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="RUN"
-        android:id="@+id/BtnRun"
-        android:layout_below="@+id/BtnGetLastWinNums"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/BtnGetLastWinNums" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/TxtBoxResult"
-        android:text="Result..."
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="111dp"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="GetAllNumbers"
-        android:id="@+id/BtnGetAllNums"
-        android:layout_below="@+id/BtnRun"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/BtnRun" />
+    </LinearLayout>
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
@@ -64,4 +36,7 @@
         ads:adSize="BANNER"
         ads:adUnitId="@string/banner_ad_unit_main_activity">
     </com.google.android.gms.ads.AdView>
+
+
+
 </RelativeLayout>

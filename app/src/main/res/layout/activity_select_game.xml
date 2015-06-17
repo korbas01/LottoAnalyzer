@@ -1,0 +1,67 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="#FFFFFF"
+    tools:context="yimscompany.lottoanalyzer.SelectGameActivity">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:weightSum="1"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/adView"
+        android:layout_alignStart="@+id/adView"
+        android:layout_alignRight="@+id/adView"
+        android:layout_alignEnd="@+id/adView"
+        android:gravity="center"
+        android:layout_above="@+id/adView"
+        xmlns:custom="http://schemas.android.com/apk/res/yimscompany.lottoanalyzer">
+
+        <yimscompany.lottoanalyzer.CompoundViews.SelectLottoGameButton
+            style="@style/SelectGameButton"
+            android:background="#FFFFFF"
+            custom:text1="Lotto"
+            custom:txtColor1="#0B62A9"
+            custom:text2="6/49"
+            custom:txtColor2="#0B62A9"
+            custom:borderColor="#0B62A9"
+            android:id="@+id/BtnLotto649" />
+        <yimscompany.lottoanalyzer.CompoundViews.SelectLottoGameButton
+            style="@style/SelectGameButton"
+            android:background="#7AA53F"
+            custom:text1="Lotto"
+            custom:txtColor1="#FFFFFF"
+            custom:text2="MAX"
+            custom:txtColor2="#FFFFFF"
+            custom:borderColor="#6A9035"
+            android:id="@+id/BtnLottoMax" />
+    </LinearLayout>
+
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Start"-->
+        <!--android:id="@+id/BtnSelect"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_centerHorizontal="true" />-->
+
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_main_activity">
+    </com.google.android.gms.ads.AdView>
+
+
+</RelativeLayout>

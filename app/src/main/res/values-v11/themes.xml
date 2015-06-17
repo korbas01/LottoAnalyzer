@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppBaseTheme" parent="@android:style/Theme.Holo.Light">
+        <!-- Customize your theme here. -->
+        <item name="android:actionBarStyle">
+            @style/defaultActionBarTheme
+        </item>
+    </style>
+
+    <style name="defaultActionBarTheme" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
+        <item name="android:icon">@android:color/transparent</item>
+        <item name="android:background">
+            #6D6D6D
+        </item>
+        <item name="android:titleTextStyle">
+            @style/defaultActionBarTitleText
+        </item>
+    </style>
+    <style name="defaultActionBarTitleText" parent="@android:style/TextAppearance">
+        <item name="android:textColor">
+            #9D9D9D
+        </item>
+        <item name="android:layout_marginTop">
+            10dp
+        </item>
+    </style>
+
+
+    <style name="Lotto649Theme" parent="@android:style/Theme.Holo.Light">
+        <!-- Customize your theme here. -->
+        <item name="android:actionBarStyle">
+            @style/lotto649ActionBarTheme
+        </item>
+    </style>
+    <style name="lotto649ActionBarTheme" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
+        <item name="android:icon">@android:color/transparent</item>
+        <item name="android:background">
+            #0B62A6
+        </item>
+        <item name="android:titleTextStyle">
+            @style/lotto649ActionBarTitleText
+        </item>
+        <item name="android:actionButtonStyle">
+            @style/BaseActionButtonStyle
+        </item>
+    </style>
+    <style name="lotto649ActionBarTitleText" parent="@android:style/TextAppearance">
+        <item name="android:textColor">
+            #FFFFFF
+        </item>
+        <item name="android:layout_marginTop">
+            10dp
+        </item>
+    </style>
+
+
+
+
+    <style name="LottoMaxTheme" parent="@android:style/Theme.Holo.Light">
+        <!-- Customize your theme here. -->
+        <item name="android:actionBarStyle">
+            @style/lottomaxActionBarTheme
+        </item>
+    </style>
+    <style name="lottomaxActionBarTheme" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
+        <item name="android:icon">@android:color/transparent</item>
+        <item name="android:background">
+            #7AA53F
+        </item>
+        <item name="android:titleTextStyle">
+            @style/lottomaxActionBarTitleText
+        </item>
+
+    </style>
+
+    <style name="lottomaxActionBarTitleText" parent="@android:style/TextAppearance">
+        <item name="android:textColor">
+            #FFFFFF
+        </item>
+        <item name="android:layout_marginTop">
+            10dp
+        </item>
+    </style>
+
+
+
+    <style name="BaseActionButtonStyle" parent="@android:style/Widget.Holo.Light.ActionButton">
+        <item name="android:maxWidth">
+            32dp
+        </item>
+        <item name="android:maxHeight">
+            32dp
+        </item>
+    </style>
+
+
+</resources>

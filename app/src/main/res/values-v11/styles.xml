@@ -1,0 +1,13 @@
+<resources>
+    <style name="SelectGameButton">
+        <item name="android:layout_width">
+            125dp
+        </item>
+        <item name="android:layout_height">
+            125dp
+        </item>
+        <item name="android:layout_margin">
+            10dp
+        </item>
+    </style>
+</resources>

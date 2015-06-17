@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBoxPreference android:title="Number Analyze"
+        android:defaultValue="true"
+        android:persistent="true"
+        android:summary="This option if selected will analyze least frequent numbers."
+        android:key="@string/pref_exclude_numbers" />
+
+    <CheckBoxPreference android:title="Pattern Analyze"
+        android:defaultValue="true"
+        android:persistent="true"
+        android:summary="This option if selected will analyze past winning number combination."
+        android:key="@string/pref_pattern_analyze" />
+
+    <yimscompany.lottoanalyzer.UIComponent.LottoSeekBarPreference
+        android:key="@string/pref_num_games"
+        android:defaultValue="@integer/PREF_DEFAULT_NUM_GAMES"
+        android:persistent="true"
+        android:title="@string/pref_num_games_title"/>
+
+</PreferenceScreen>

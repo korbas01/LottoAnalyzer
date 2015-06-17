@@ -41,6 +41,7 @@ public class LottoAnalyzerDialogFragment extends DialogFragment {
 
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
         builder.setMessage(message)
                 .setPositiveButton(btnPos, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -48,6 +49,7 @@ public class LottoAnalyzerDialogFragment extends DialogFragment {
                         activity.onReturnValue(true);
                     }
                 });
+
 //        if(! args.getString(DIALOG_NEG_BTN_LABEL).isEmpty())
 //        {
 //            builder.setNegativeButton(btnNeg, new DialogInterface.OnClickListener() {

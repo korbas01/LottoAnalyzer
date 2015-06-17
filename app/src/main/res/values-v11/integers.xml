@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="OLG_LOTTO649_MIN_RANGE">1</integer>
+    <integer name="OLG_LOTTO649_MAX_RANGE">49</integer>
+    <integer name="OLG_LOTTO649_PICK_NUMS">6</integer>
+    <integer name="OLG_LOTTO649_GAME_ID">1</integer>
+
+    <integer name="OLG_LOTTOMAX_MIN_RANGE">1</integer>
+    <integer name="OLG_LOTTOMAX_MAX_RANGE">49</integer>
+    <integer name="OLG_LOTTOMAX_PICK_NUMS">7</integer>
+    <integer name="OLG_LOTTOMAX_GAME_ID">73</integer>
+
+    <integer name="PREF_DEFAULT_NUM_GAMES">5</integer>
+</resources>
