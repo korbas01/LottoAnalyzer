@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -27,19 +26,6 @@ public class SQLHelper extends SQLiteOpenHelper {
     public static final int DATA_BASE_VER = 1;
 
     private static final String LOTTOMASTER_DATABASE_FILE_NAME = "lotto.db";
-
-//    private static SQLHelper sInstance;
-//
-//    public static synchronized SQLHelper getInstance(Context context, LottoGame g) {
-//
-//        // Use the application context, which will ensure that you
-//        // don't accidentally leak an Activity's context.
-//        // See this article for more information: http://bit.ly/6LRzfx
-//        if (sInstance == null) {
-//            sInstance = new SQLHelper(context.getApplicationContext(), g);
-//        }
-//        return sInstance;
-//    }
 
 
     public SQLHelper(Context context, LottoGame aGame) {
@@ -78,6 +64,7 @@ public class SQLHelper extends SQLiteOpenHelper {
 
 
     public void addGameRecord(LottoGame gameType, ArrayList<LottoRecord> records) {
+
         for(LottoRecord r : records){
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues content = new ContentValues();
@@ -91,7 +78,7 @@ public class SQLHelper extends SQLiteOpenHelper {
             content.put(LOTTO_COL_NAME_DATE, r.getDate());
             db.insert(gameType.getTableName(),null,content);
             db.close();
-            Log.d("sqlhelper","ADD Game Record!! @" + r.getWinningNums().size() + "," + r.getDate() );
+//            Log.d("sqlhelper","ADD Game Record!! @" + r.getWinningNums().size() + "," + r.getDate() );
         }
     }
 
@@ -157,139 +144,6 @@ public class SQLHelper extends SQLiteOpenHelper {
 
         }
 
-
-//    /* it will return "number" of the most recent winning numbers.
-//     * number: a number of records of the winning numbers you want to get
-//     * return: it returns a set of the last n-th winning records,
-//     * */
-//     //todo: this method needs to be deprecated
-//     public ArrayList<Integer>  GetLastBonusNumber111111(int numGames)
-//    {
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        ArrayList<Integer> result = new ArrayList<Integer>();
-//        String orderBySQLQuery = "";
-//        if(numGames <= 0)
-//        {
-//            orderBySQLQuery = "date DESC limit 1";
-//
-//        }else{
-//            orderBySQLQuery = "date DESC limit " + numGames;
-//        }
-//
-//        //Cursor c = db.rawQuery(rawQuery, null);
-//        Cursor c = db.query(LOTTO649_PAST_WINNING_NUMBERS_TABLE_NAME, //table
-//                new String[] {LOTTO649_COL_NAME_BONUS_NUMBER}, //columns
-//                null,//selection,
-//                null,//selectionArgs,
-//                null,//groupBy,
-//                null,//having,
-//                orderBySQLQuery);//orderBy
-//
-//        if(c.moveToFirst()){
-//            do{
-//
-//                String debugMsg= "";
-//                if( ! result.contains(Integer.valueOf(c.getInt(0))))
-//                {
-//                    result.add(Integer.valueOf(c.getInt(0)));
-//                    debugMsg += c.getInt(0) + ",";
-//                }
-//                Log.d("SQLHelper","ArrayList<Integer> GetBonusNumbers returns " + debugMsg);
-//            }while(c.moveToNext());
-//        }
-//        return result;
-//    }
-//
-//    /* return the more recent of "numGames" of encore numbers
-//    * */
-////todo:it needs to be deprecated
-//     public ArrayList<String> GetLastEncoreNumber111111(int numGames)
-//    {
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        ArrayList<String> result = new ArrayList<>();
-//        String orderBySQLQuery = "";
-//        if(numGames <= 0)
-//        {
-//            orderBySQLQuery = "date DESC limit 1";
-//
-//        }else{
-//            orderBySQLQuery = "date DESC limit " + numGames;
-//        }
-//
-//        //Cursor c = db.rawQuery(rawQuery, null);
-//        Cursor c = db.query(LOTTO649_PAST_WINNING_NUMBERS_TABLE_NAME, //table
-//                new String[] {LOTTO649_COL_NAME_ENCORE_NUMBER}, //columns
-//                null,//selection,
-//                null,//selectionArgs,
-//                null,//groupBy,
-//                null,//having,
-//                orderBySQLQuery);//orderBy
-//
-//        if(c.moveToFirst()){
-//            do{
-//
-//                String debugMsg= "";
-//                if( ! result.contains(String.valueOf(c.getString(0))))
-//                {
-//                    result.add(String.valueOf(c.getString(0)));
-//                    debugMsg += c.getInt(0) + ",";
-//                }
-//                Log.d("SQLHelper","ArrayList<Integer> GetBonusNumbers returns " + debugMsg);
-//            }while(c.moveToNext());
-//        }
-//        return result;
-//    }
-//
-//    /* it will return "number" of the most recent winning numbers.
-//     * @param numGames: a number of records of the winning numbers you want to get
-//     * return: it returns a set of the last n-th winning records,
-//     * */
-////todo: it needs to be deprecated
-//     public ArrayList<Integer> GetLastWinningNumbers111111(int numGames)
-//    {
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        ArrayList<Integer> result = new ArrayList<Integer>();
-//        String orderBySQLQuery;
-//        if(numGames <= 0)
-//        {
-//            orderBySQLQuery = "date DESC limit 1";
-//
-//        }else{
-//            orderBySQLQuery = "date DESC limit " + numGames;
-//        }
-//        //Cursor c = db.rawQuery(rawQuery, null);
-//        Cursor c = db.query(LOTTO649_PAST_WINNING_NUMBERS_TABLE_NAME, //table
-//                new String[] {LOTTO_COL_DATE,LOTTO_COL_NAME_NUMBER1, LOTTO_COL_NAME_NUMBER2, LOTTO_COL_NAME_NUMBER3, LOTTO_COL_NAME_NUMBER4, LOTTO_COL_NAME_NUMBER5, LOTTO_COL_NAME_NUMBER6}, //columns
-//                null,//selection,
-//                null,//selectionArgs,
-//                null,//groupBy,
-//                null,//having,
-//                orderBySQLQuery);//orderBy
-//
-//        if(c.moveToFirst()){
-//            do{
-//
-//                String debugMsg= "";
-//                for(int i =1 ; i <= 6 ; i++)
-//                {
-//                    if( ! result.contains(Integer.valueOf(c.getInt(i))))
-//                    {
-//                        result.add(Integer.valueOf(c.getInt(i)));
-//                        debugMsg += c.getInt(i) + ",";
-//                    }
-//                }
-//                debugMsg += " at " + c.getString(0);
-//                Log.d("SQLHelper","ArrayList<Integer> GetLastWinningNumbers returns " + debugMsg);
-//            }while(c.moveToNext());
-//        }else{
-//            Log.d("SQLHelper", "Wtf something is wrong in DB T T");
-//
-//        }
-//
-//        //sorting the result
-//        Collections.sort(result);
-//        return result;
-//    }
 
     /**
      * check db and if the most recent record does not match with the latest date in DB, return true

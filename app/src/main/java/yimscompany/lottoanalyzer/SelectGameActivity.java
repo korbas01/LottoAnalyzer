@@ -41,16 +41,8 @@ public class SelectGameActivity extends Activity {
 
     }
 
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_select_game, menu);
-//        return true;
-//    }
-
     /* check connectivity whether it's able to download html content or not.
-    * */
+    */
     public boolean checkConnectivity() {
         //TODO: improve check connectivity, it needs to handle a case where 3g data is not available.
         ConnectivityManager cm =
@@ -60,15 +52,6 @@ public class SelectGameActivity extends Activity {
         boolean isConnected = activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
         return isConnected;
-//
-//        if( ! isConnected  ) {
-//            Bundle dialogArgs = new Bundle();
-//            dialogArgs.putString(LottoAnalyzerDialogFragment.DIALOG_MSG,"It's not connected to internet. Please try again later.");
-//            dialogArgs.putString(LottoAnalyzerDialogFragment.DIALOG_POS_BTN_LABEL, "OK") ;
-//            showAlert(dialogArgs);
-//            return false;
-//        }
-//        return true;
 
     }
 
@@ -209,41 +192,6 @@ public class SelectGameActivity extends Activity {
 
         }
     }
-
-    /**
-     * init. / return a Game object.
-     * @return null if a game name not in the pre-defined list
-     *
-     */
-
-
-//    public LottoGame getSelectedGame(){
-//        Spinner spinner = (Spinner) findViewById(R.id.selectGameSpinner);
-//        String selectedGame = spinner.getSelectedItem().toString();
-//        Resources res = getResources();
-//        if(selectedGame.equals(getString(R.string.game_lotto649_on_ca))){
-//            LottoGame aLottoGame = new LottoGame(getString(R.string.game_lotto649_on_ca),
-//                    getString(R.string.game_province_ontario),
-//                    getString(R.string.game_country_canada),
-//                    res.getInteger(R.integer.OLG_LOTTO649_GAME_ID),
-//                    res.getInteger(R.integer.OLG_LOTTO649_PICK_NUMS),
-//                    true, true,
-//                    res.getInteger(R.integer.OLG_LOTTO649_MIN_RANGE),
-//                    res.getInteger(R.integer.OLG_LOTTO649_MAX_RANGE) );
-//            return aLottoGame;
-//        }else if(selectedGame.equals(getString(R.string.game_lottomax_on_ca))){
-//            LottoGame aLottoGame = new LottoGame(getString(R.string.game_lottomax_on_ca),
-//                    getString(R.string.game_province_ontario),
-//                    getString(R.string.game_country_canada),
-//                    res.getInteger(R.integer.OLG_LOTTOMAX_GAME_ID),
-//                    res.getInteger(R.integer.OLG_LOTTOMAX_PICK_NUMS),
-//                    true, true,
-//                    res.getInteger(R.integer.OLG_LOTTOMAX_MIN_RANGE),
-//                    res.getInteger(R.integer.OLG_LOTTOMAX_MAX_RANGE));
-//            return aLottoGame;
-//        }
-//        return null;
-//    }
 
     private void UpdatingPastWinningNums() {
         if(mIntentReceiver == null) {

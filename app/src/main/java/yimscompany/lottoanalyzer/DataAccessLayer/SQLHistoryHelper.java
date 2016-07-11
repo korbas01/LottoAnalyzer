@@ -24,21 +24,7 @@ public class SQLHistoryHelper extends SQLiteOpenHelper {
     public static final int DATA_BASE_VER = 1;
 
     private static final String HISTORY_DATABASE_FILE_NAME = "myhistory.db";
-
-
     private LottoGame mSelectedGame;
-//    private static SQLHistoryHelper sInstance;
-//
-//    public static synchronized SQLHistoryHelper getInstance(Context context, LottoGame g) {
-//
-//        // Use the application context, which will ensure that you
-//        // don't accidentally leak an Activity's context.
-//        // See this article for more information: http://bit.ly/6LRzfx
-//        if (sInstance == null) {
-//            sInstance = new SQLHistoryHelper(context.getApplicationContext(), g);
-//        }
-//        return sInstance;
-//    }
 
     public SQLHistoryHelper(Context context, LottoGame aGame) {
         super(context, HISTORY_DATABASE_FILE_NAME, null, DATA_BASE_VER);

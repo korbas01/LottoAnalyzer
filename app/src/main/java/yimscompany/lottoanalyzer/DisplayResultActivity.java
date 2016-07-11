@@ -33,11 +33,6 @@ public class DisplayResultActivity extends Activity {
 
         Bundle extra = getIntent().getExtras();
         if(extra != null) {
-            //String strResult = extra.getString(MainActivity.ResponseReceiver.EXTRA_PARAM_SEND_RESULT);
-            //TextView result = (TextView) findViewById(R.id.TxtBoxResult);
-            //result.setText(strResult);
-
-            //getIntent().getSerializableExtra()
             if(getIntent().getAction().equals(MainActivity.ResponseReceiver.ACTION_RESP_LOTTO_ANALYZER_EXPECTED_WINNING_NUMS))
             {
                 ArrayList<LottoRecord> result = extra.getParcelableArrayList(MainActivity.ResponseReceiver.EXTRA_PARAM_SEND_PARCELABLE_ARRAYLIST_RESULT);

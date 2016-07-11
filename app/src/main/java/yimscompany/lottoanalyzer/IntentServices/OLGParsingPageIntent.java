@@ -88,19 +88,12 @@ public class OLGParsingPageIntent extends IntentService {
                 ArrayList<Integer> r = handleActionLastWinNums(selectedGame);
                 broadcastIntent.putIntegerArrayListExtra(EXTRA_PARAM_OUT_MSG_ARRAYLIST_INTEGER,r);
                 broadcastIntent.setAction(MainActivity.ResponseReceiver.ACTION_RESP_LAST_WIN_NUMS);
-            }else if(ACTION_CHECK_UPDATE.equals(action)) {
-                //TODO: compare last winning num data from db and the web
-                if(isUpToDate(null)){
-
-                }
             }
             //postback result to activity
             broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
             sendBroadcast(broadcastIntent);
         }
     }
-
-
 
 
     /**
@@ -150,21 +143,5 @@ public class OLGParsingPageIntent extends IntentService {
     private ArrayList<Integer> handleActionLastWinNums(LottoGame selectedGame) {
         ParsingOLGPage pPage = new ParsingOLGPage(getApplicationContext(), selectedGame);
         return pPage.ParsingLastWinningNumbers();
-        //todo: fix or handle?
-        //return null;
     }
-
-    /**
-     * check whether the DB is up to date or not
-     * @param game: it contains game info.
-     * @return true if it's up to date
-     */
-    private boolean isUpToDate(LottoGame game){
-        //ParsingOLGPage pPage = new ParsingOLGPage(getApplicationContext());
-        //TODO: has not implemented yet!
-        //ArrayList<Integer> lastWinningNumsFromDB = pPage.ParsingLastWinningNumbers();
-        return false;
-    }
-
-
 }

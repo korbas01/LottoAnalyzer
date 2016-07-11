@@ -68,22 +68,15 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-//        registerIntentReceiver();
-//        registerButtons();
-//        initListView();
-//        LottoUIHelper.InitAdView((AdView) findViewById(R.id.adView));
-//        initComponents();
     }
 
     @Override
     protected void onPause() {
-        //unregisterIntentReceiver();
         super.onPause();
     }
 
     @Override
     protected void onStop() {
-        //unregisterIntentReceiver();
         super.onStop();
     }
 
@@ -213,16 +206,7 @@ public class MainActivity extends Activity {
 
             lastWinNumsFilter.addCategory(Intent.CATEGORY_DEFAULT);
 
-//            IntentFilter expectedWinNumsFilter = new IntentFilter(ResponseReceiver.ACTION_RESP_LOTTO_ANALYZER_EXPECTED_WINNING_NUMS);
-//            expectedWinNumsFilter.addCategory(Intent.CATEGORY_DEFAULT);
-//
-//            IntentFilter getAllPossibleNumsFilter = new IntentFilter(ResponseReceiver.ACTION_RESP_LOTTO_ANALYZER_ALL_NUMS);
-//            getAllPossibleNumsFilter.addCategory(Intent.CATEGORY_DEFAULT);
-
             registerReceiver(mIntentReceiver, lastWinNumsFilter);
-//            registerReceiver(mIntentReceiver, runFilter);
-//            registerReceiver(mIntentReceiver, getAllPossibleNumsFilter);
-
         }
     }
 

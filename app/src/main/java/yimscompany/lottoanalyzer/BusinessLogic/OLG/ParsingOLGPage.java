@@ -2,7 +2,6 @@ package yimscompany.lottoanalyzer.BusinessLogic.OLG;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.util.Log;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -16,11 +15,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import yimscompany.lottoanalyzer.Exceptions.InvalidConnectionException;
 import yimscompany.lottoanalyzer.BusinessObjects.LottoGame;
 import yimscompany.lottoanalyzer.BusinessObjects.LottoRecord;
 import yimscompany.lottoanalyzer.Components.LottoRecordComparator;
 import yimscompany.lottoanalyzer.DataAccessLayer.SQLHelper;
+import yimscompany.lottoanalyzer.Exceptions.InvalidConnectionException;
 import yimscompany.lottoanalyzer.Interfaces.ParsingPage;
 import yimscompany.lottoanalyzer.R;
 
@@ -53,14 +52,6 @@ public class ParsingOLGPage extends NullPointerException implements ParsingPage 
      */
     public ArrayList<Integer> ParsingLastWinningNumbers()
     {
-//        //is it already in the db?
-//        if(_lottoSQLHelper != null && _lottoSQLHelper.GetLastWinningNumbers(1).size()>0) {
-//            ArrayList<Integer> result = new ArrayList<>();
-//            result = _lottoSQLHelper.GetLastWinningNumbers(1);
-//            if(result.size() > 0)
-//                return result;
-//        }
-
 
         URL url = null;
         //result contains past winning numbers,
@@ -98,7 +89,6 @@ public class ParsingOLGPage extends NullPointerException implements ParsingPage 
             aRecord[7] = lotto649Row.children().get(2).children().get(0).attr("alt");
             aRecord[8] = lotto649Row.children().get(3).children().get(0).attr("alt");
             listNums.add(aRecord);
-            this.insertIntoDB(listNums);
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -133,61 +123,23 @@ public class ParsingOLGPage extends NullPointerException implements ParsingPage 
         Document doc = null;
         ArrayList<LottoRecord> lottoRecords = new ArrayList<>();
         try {
-//			Log.d("DownloadPageRunnable", "parsingPastWinningNumbers()::url=" + requestURL);
             String sUrl = String.format(requestURL);
             doc = Jsoup.connect(sUrl).get();
 
-            //Element winningNumTable = doc.getElementById("lottery_border");
             //olg website has been changed...
             Elements winningNumTable = doc.select("table.font.lottery_border");
 
-            //children[3] represent <tr> of lotto 649
-//			Log.d("DownloadPageRunnable", "@@@aURL=" + sUrl);
-//			Log.d("DownloadPageRunnable","@@@WinningPastNumbers="+winningNumTable.children().get(0).children().size());
-
             //table contents
             Element lottoTable =  winningNumTable.get(0).children().get(0);
-            lottoRecords = parsingLottoPastWinningNumTable(lottoTable);
+            lottoRecords = parsingLottoPastWinningNumTable(lottoTable) ;
 
-            if(lottoRecords.size() > 0)
+
+            if(!lottoRecords.isEmpty()) {
                 mLottoSQLHelper.addGameRecord(mSelectedGame, lottoRecords);
-
-/***
-            ArrayList<LottoRecord> lottoRecords = new ArrayList<>();
-            //retrieving from the second row, first row is header
-            for(int i =1 ; i < lottoTable.children().size() ; i++ )
-            {
-                //String[] aRecord = new String[9];
-                Element lotto649WinningnumRow = lottoTable.children().get(i);
-                //aRecord[0] = parsingDate(lotto649WinningnumRow.children().get(0).children().get(0).children().get(0).html().trim());
-                String date =  parsingDate(lotto649WinningnumRow.children().get(0).children().get(0).children().get(0).html().trim());
-                //OLG has changed their table format, we must handle the exceptions whether the first row is String or winning numbers
-                String winningNum = lotto649WinningnumRow.children().get(2).children().get(0).children().get(0).html().trim();
-
-                if(winningNum.equalsIgnoreCase("MAIN DRAW"))
-                {
-                    //get the next row
-                    winningNum = lotto649WinningnumRow.children().get(2).children().get(0).children().get(1).html().trim();
-                }
-
-                //String[] winningNumbers = winningNum.split(" ");
-                ArrayList<Integer> winningNumbers = new ArrayList<>();
-                for(String aNumber : winningNum.split(" ")) {
-                    winningNumbers.add(new Integer(aNumber));
-                }
-
-                Integer bonusNum = new Integer(lotto649WinningnumRow.children().get(3).children().get(0).children().get(0).html().trim()); //bonus num
-                Integer encoreNum = new Integer(lotto649WinningnumRow.children().get(4).children().get(0).children().get(0).html().trim()); //encore num
-                lottoRecords.add(new LottoRecord(winningNumbers, bonusNum, encoreNum, date));
-
             }
- ***/
-        }catch (Exception e1) {
-            // TODO Auto-generated catch block
-            throw new InvalidConnectionException(mContext.getString(R.string.err_no_connection));
-        }finally{
-//            if(lottoRecords.size() > 0)
-//                mLottoSQLHelper.addGameRecord(mSelectedGame, lottoRecords);
+
+        }catch(Exception e1) {
+           //throw new InvalidConnectionException(mContext.getString(R.string.err_no_connection));
         }
 
     }
@@ -206,17 +158,12 @@ public class ParsingOLGPage extends NullPointerException implements ParsingPage 
         ArrayList<LottoRecord> recentGame = mLottoSQLHelper.GetRecentGame(mSelectedGame,1);
 
         if(recentGame != null && recentGame.size() > 0) {
-            Log.d("lottoanalyzer" , "compare two values :" + lastDate + ", " +recentGame.get(0).getDate() +"; returns " + lastDate.equals(recentGame.get(0).getDate()));
+//            Log.d("lottoanalyzer" , "compare two values :" + lastDate + ", " +recentGame.get(0).getDate() +"; returns " + lastDate.equals(recentGame.get(0).getDate()));
             return lastDate.equals(recentGame.get(0).getDate());
         }
         return false;
     }
 
-    //TODO : implement parsing encore numers
-    public void ParsingEncoreNumbers()
-    {
-
-    }
 
     private ArrayList<LottoRecord> parsingLottoPastWinningNumTable(Element lottoTable) {
         Resources res = mContext.getResources();
@@ -289,11 +236,6 @@ public class ParsingOLGPage extends NullPointerException implements ParsingPage 
             //OLG has changed their table format, we must handle the exceptions whether the first row is String or winning numbers
             String winningNum = lottoMaxWinningnumRow.children().get(1).children().get(0).children().get(0).html().trim();
 
-            if(date=="2015-01-09")
-            {
-                int hoho = 1;
-            }
-
             if(winningNum.equalsIgnoreCase("MAIN DRAW"))
             {
                 //get the first child in the next row
@@ -322,47 +264,6 @@ public class ParsingOLGPage extends NullPointerException implements ParsingPage 
         return lottoRecords;
     }
 
-    /* put parsing results into the DB
-     * */
-    private void insertIntoDB(List<String[]> result)
-    {
-        try{
-//            ArrayList<Integer> winningNums = new ArrayList<Integer>();
-//            for(int i =0 ; i < result.size(); i++)
-//            {
-//                String[] aRecord = result.get(i);
-//                for(int j =1 ; j < aRecord.length; j++)
-//                {
-//                    winningNums.add(new Integer(aRecord[j]));
-////					Log.d("lottoMaster", "result[" + i + "] = " + aRecord[j]);
-//                }
-//                this.mLottoSQLHelper.addWinningNumbers(winningNums, aRecord[0]);
-//                winningNums.clear();
-//            }
-//            for(String[] aRecord : result){
-//                String date = aRecord[0];
-//                Integer bonusNum;
-//                Integer enoreNum;
-//                for(int j =1 ; j <= aRecord.length; j++)
-//                {
-//                    winningNums.add(new Integer(aRecord[j]));
-//                }
-//
-//                if(mSelectedGame.getHasBonusNum() && aRecord[8]) {
-//
-//                }
-//                if(mSelectedGame.getHasEncore()) {
-//
-//                }
-//
-//                winningNums.clear();
-//            }
-
-        }catch(IllegalArgumentException e)
-        {
-
-        }
-    }
 
     /**
      * it will parse OLG DOM document and extract info. what we need then it will format data in LottoRecord
@@ -393,37 +294,6 @@ public class ParsingOLGPage extends NullPointerException implements ParsingPage 
             Element lottoTable =  winningNumTable.get(0).children().get(0);
             lottoRecords = parsingLottoPastWinningNumTable(lottoTable);
 
-            //children[3] represent <tr> of lotto 649
-/***
-            for(int i =1 ; i < lottoTable.children().size() ; i++ )
-            {
-                //String[] aRecord = new String[9];
-                Element lotto649WinningnumRow = lottoTable.children().get(i);
-                //aRecord[0] = parsingDate(lotto649WinningnumRow.children().get(0).children().get(0).children().get(0).html().trim());
-                String date =  parsingDate(lotto649WinningnumRow.children().get(0).children().get(0).children().get(0).html().trim());
-                //OLG has changed their table format, we must handle the exceptions whether the first row is String or winning numbers
-                String winningNum = lotto649WinningnumRow.children().get(2).children().get(0).children().get(0).html().trim();
-
-                if(winningNum.equalsIgnoreCase("MAIN DRAW"))
-                {
-                    //get the next row
-                    winningNum = lotto649WinningnumRow.children().get(2).children().get(0).children().get(1).html().trim();
-                }
-
-                //String[] winningNumbers = winningNum.split(" ");
-                ArrayList<Integer> winningNumbers = new ArrayList<>();
-                for(String aNumber : winningNum.split(" ")) {
-                    winningNumbers.add(new Integer(aNumber));
-                }
-
-                Integer bonusNum = new Integer(lotto649WinningnumRow.children().get(3).children().get(0).children().get(0).html().trim()); //bonus num
-                Integer encoreNum = new Integer(lotto649WinningnumRow.children().get(4).children().get(0).children().get(0).html().trim()); //encore num
-                lottoRecords.add(new LottoRecord(winningNumbers, bonusNum, encoreNum, date));
-            }
-            //this.insertIntoDB(result);
-
-            //mLottoSQLHelper.addGameRecord(mSelectedGame, lottoRecords);
-***/
 
         } catch (Exception e1) {
             // TODO Auto-generated catch block
@@ -483,10 +353,6 @@ public class ParsingOLGPage extends NullPointerException implements ParsingPage 
             d[1] = "12";
         }
         result = d[2] +"-" + d[1] + "-" + d[0];
-//		Log.d("DownloadPageRunnable","@@@@@@ParsingDate@@@@@@@");
-//		Log.d("DownloadPageRunnable","@@@@@@result " + result + "@@@@@@@");
-//		Log.d("DownloadPageRunnable","@@@@@@@@@@@@@@@@@@@@@@@@");
-
         return result;
     }
 

@@ -49,15 +49,6 @@ public class LottoAnalyzerDialogFragment extends DialogFragment {
                         activity.onReturnValue(true);
                     }
                 });
-
-//        if(! args.getString(DIALOG_NEG_BTN_LABEL).isEmpty())
-//        {
-//            builder.setNegativeButton(btnNeg, new DialogInterface.OnClickListener() {
-//                public void onClick(DialogInterface dialog, int id) {
-//                    // User cancelled the dialog
-//                }
-//            });
-//        }
         // Create the AlertDialog object and return it
         return builder.create();
     }
